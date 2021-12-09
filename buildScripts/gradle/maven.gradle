@@ -57,7 +57,7 @@ def gitShortRev() {
 }
 
 def setScm(scm) {
-    scm.appendNode('connection', "https://github.com/${System.getenv("GITHUB_ACTOR")}/Shadow.git")
+    scm.appendNode('connection', "https://github.com/nigalinson/Shadow.git")
 
     def commit
     if ("${System.env.CI}".equalsIgnoreCase("true")) {
@@ -65,7 +65,7 @@ def setScm(scm) {
     } else {
         commit = gitShortRev()
     }
-    scm.appendNode('url', "https://github.com/${System.getenv("GITHUB_ACTOR")}/Shadow/commit/$commit")
+    scm.appendNode('url', "https://github.com/nigalinson/Shadow/commit/$commit")
 }
 
 def setGeneratePomFileAndDepends(publicationName) {
