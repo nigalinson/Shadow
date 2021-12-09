@@ -416,30 +416,20 @@ publishing {
                 def user = properties.getProperty('gpr.user')
                 def key = properties.getProperty('gpr.key')
                 maven {
-                    name = "GitHubPackages"
+                    allowInsecureProtocol = true
+                    name = "maven-snapshots"
                     credentials {
                         username = user
                         password = key
                     }
-                    url "https://maven.pkg.github.com/${user}/shadow"
+                    url "http://localhost:8081/repository/maven-snapshots/"
                 }
 
                 useLocalCredential = true
             }
         }
 
-        if (!useLocalCredential && "${System.env.CI}".equalsIgnoreCase("true")) {
-            maven {
-                name = "GitHubPackages"
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
-                }
-                url "https://maven.pkg.github.com/" + "${System.env.GITHUB_REPOSITORY}".toLowerCase()
-            }
-        } else {
-            mavenLocal()
-        }
+        mavenLocal()
     }
 }
 
